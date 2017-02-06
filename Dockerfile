@@ -3,7 +3,7 @@
 #
 # https://aws.amazon.com/blogs/aws/dynamodb-local-for-desktop-development/
 #
-FROM java:8-jre-alpine
+FROM java:8-jre
 
 # Create working space
 RUN mkdir /var/dynamodb_wd
@@ -17,7 +17,7 @@ RUN wget -O /var/dynamodb_wd/dynamodb_local_latest https://s3-us-west-2.amazonaw
 RUN tar xfz /var/dynamodb_wd/dynamodb_local_latest
 
 # Default command for image
-ENTRYPOINT ["/usr/bin/java", "-Djava.library.path=.", "-jar", "DynamoDBLocal.jar", "-sharedDb", "-inMemory", "-dbPath"]
+ENTRYPOINT ["/usr/bin/java", "-Djava.library.path=.", "-jar", "DynamoDBLocal.jar", "-sharedDb", "-inMemory"]
 CMD ["-port", "8000"]
 
 # Add VOLUMEs to allow backup of config, logs and databases
